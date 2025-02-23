@@ -1,5 +1,5 @@
 package com.task.task.service.task;
-
+import com.task.task.exception.TaskNotFoundException;
 import com.task.task.model.task.Task;
 import com.task.task.repository.task.TaskRepository;
 import com.task.task.request.task.CreateTaskRequest;
@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task getTaskById(UUID id) {
-        return taskRepository.findById(id).orElseThrow(()-> new RuntimeException("Task not found"));
+        return taskRepository.findById(id).orElseThrow(()-> new TaskNotFoundException("Task not found"));
     }
 
     @Override
@@ -33,7 +33,22 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task updateTask(UUID id, UpdateTaskRequest updateTaskRequest) {
-        return null;
+        Task task = getTaskById(id);
+
+        if(updateTaskRequest.getTitle() != null){
+            task.setTitle(updateTaskRequest.getTitle());
+        }
+
+        if(updateTaskRequest.getDescription() != null){
+            task.setDescription(updateTaskRequest.getDescription());
+        }
+
+        if(updateTaskRequest.getCategories() != null){
+            task.setCategories(updateTaskRequest.getCategories());
+        }
+
+        return taskRepository.save(task);
+
     }
 
     @Override
