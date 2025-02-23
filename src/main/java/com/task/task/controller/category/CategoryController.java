@@ -2,8 +2,6 @@ package com.task.task.controller.category;
 
 import com.task.task.request.category.CreateCategoryRequest;
 import com.task.task.request.category.UpdateCategoryRequest;
-import com.task.task.request.task.CreateTaskRequest;
-import com.task.task.request.task.UpdateTaskRequest;
 import com.task.task.response.ApiResponse;
 import com.task.task.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +18,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse> fetchAllTasks() {
+    public ResponseEntity<ApiResponse> fetchAllCategory() {
         try {
             return ResponseEntity.ok(new ApiResponse("All Categories", categoryService.getAllCategories()));
         } catch (Exception e) {
@@ -29,11 +27,11 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/create-category")
-    public ResponseEntity<ApiResponse> createTask(@ModelAttribute CreateCategoryRequest createCategoryRequest) {
+    public ResponseEntity<ApiResponse> createCategory(@ModelAttribute CreateCategoryRequest createCategoryRequest) {
         try {
             return ResponseEntity.ok(new ApiResponse("Category Created Successfully", categoryService.createCategory(createCategoryRequest)));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Failed to create task", e.getMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Failed to create category", e.getMessage()));
         }
     }
 
@@ -47,7 +45,7 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/update-category/{id}")
-    public ResponseEntity<ApiResponse> updateTask(@PathVariable UUID id, @ModelAttribute UpdateCategoryRequest updateCategoryRequest) {
+    public ResponseEntity<ApiResponse> updateCategory(@PathVariable UUID id, @ModelAttribute UpdateCategoryRequest updateCategoryRequest) {
         try {
             return ResponseEntity.ok(new ApiResponse("Category Updated Successfully", categoryService.updateCategory(id, updateCategoryRequest)));
         } catch (Exception e) {
@@ -56,7 +54,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/delete-category/{id}")
-    public ResponseEntity<ApiResponse> deleteTask(@PathVariable UUID id){
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable UUID id){
         try{
             return ResponseEntity.ok(new ApiResponse("Category Deleted Successfully", categoryService.deleteCategory(id)));
         }
