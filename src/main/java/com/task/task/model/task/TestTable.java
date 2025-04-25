@@ -1,12 +1,14 @@
-package com.task.task.model.category;
+package com.task.task.model.task;
 
+import com.task.task.response.category.CategoryResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import java.util.Date;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -14,14 +16,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Category {
-
+public class TestTable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    private String title;
     private String description;
+
+    @Transient
+    private List<CategoryResponse> categories;
 
     private Date createdAt;
     private Date updatedAt;
@@ -36,6 +40,4 @@ public class Category {
     public void preUpdate(){
         this.updatedAt = new Date();
     }
-
-
 }

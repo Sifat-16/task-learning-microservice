@@ -1,6 +1,6 @@
 package com.task.task.model.task;
 
-import com.task.task.model.category.Category;
+import com.task.task.response.category.CategoryResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +23,10 @@ public class Task {
 
     private String title;
     private String description;
-    @ManyToMany
-    private List<Category> categories;
+
+    @Transient
+    private List<CategoryResponse> categories;
+
     private Date createdAt;
     private Date updatedAt;
 

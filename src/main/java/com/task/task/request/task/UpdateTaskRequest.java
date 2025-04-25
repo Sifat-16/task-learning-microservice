@@ -1,6 +1,6 @@
 package com.task.task.request.task;
 
-import com.task.task.model.category.Category;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +15,5 @@ import java.util.List;
 public class UpdateTaskRequest {
     private String title;
     private String description;
-    private List<Category> categories;
+//    private List<Category> categories;
 }
